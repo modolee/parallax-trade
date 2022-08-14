@@ -1,0 +1,4 @@
+[submodule "submodules/scraper"]
+	path = submodules/scraper
+	url = git@github.com:modolee/parallax-trade-scraper.git
+	branch = main
