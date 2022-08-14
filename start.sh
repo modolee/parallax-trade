@@ -2,6 +2,7 @@
 
 CMD="docker compose \
   -p parallax-trade \
+  -f compose/compose.mariadb.yml \
   -f compose/compose.scraper.yml"
 
 function build()
@@ -32,14 +33,16 @@ function menu()
 
 echo
 PS3="실행할 서비스를 선택하세요 > "
-COLUMNS=30
+COLUMNS=20
 options=(
   "Scraper"
+  "MariaDB"
   "Quit"
 )
 select yn in "${options[@]}"; do
     case $yn in
         "Scraper")  menu  "scraper" ".env.local";     break;;
+        "MariaDB")  menu  "mariadb" ".env.local";     break;;
         "Quit" )    exit;;
     esac
 done

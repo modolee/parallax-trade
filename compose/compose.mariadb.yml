@@ -1,0 +1,23 @@
+services:
+  mariadb:
+    image: mariadb:10.3
+    container_name: 'parallax-trade-mariadb'
+    profiles:
+      - scraper
+      - mariadb
+    volumes:
+      - ../data/mariadb:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+      MARIADB_INITDB_SKIP_TZINFO: true
+    ports:
+      - '3306:3306'
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    restart: on-failure

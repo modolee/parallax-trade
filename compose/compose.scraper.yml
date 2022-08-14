@@ -22,8 +22,3 @@ services:
         soft: 65535
         hard: 65535
     restart: on-failure
-    logging:
-      driver: 'json-file'
-      options:
-        max-size: '10m'
-        max-file: '5'
