@@ -1,0 +1,29 @@
+services:
+  scraper:
+    image: parallax-trade/scraper
+    container_name: 'parallax-trade-scraper'
+    profiles:
+      - scraper
+    build:
+      context: ../submodules/scraper
+      dockerfile: Dockerfile.local
+    volumes:
+      - ../submodules/scraper:/app
+    environment:
+      APP_ENV: ${APP_ENV}
+      SCRAPER_PORT: ${SCRAPER_PORT}
+      KOREA_PRICE_SOURCE_URL: ${KOREA_PRICE_SOURCE_URL}
+      INTERNATIONAL_PRICE_SOURCE_URL: ${INTERNATIONAL_PRICE_SOURCE_URL}
+    ports:
+      - '${SCRAPER_PORT}:${SCRAPER_PORT}'
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 65535
+        hard: 65535
+    restart: on-failure
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
